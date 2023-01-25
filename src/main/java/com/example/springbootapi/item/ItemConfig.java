@@ -15,7 +15,7 @@ public class ItemConfig {
             Item laptopStandSilver = new Item("Laptop Stand", "silver", 39.99, 3);
             Item laptopStandBlack = new Item("Laptop Stand", "black", 39.99, 1);
             Item wirelessMouseBlack = new Item("Wireless Mouse", "black", 28.99, 3);
-            Item wirelessMouseWhite = new Item("Wireless Mouse", "black", 28.99, 0);
+            Item wirelessMouseWhite = new Item("Wireless Mouse", "white", 28.99, 0);
 
             itemRepository.saveAll(
                     List.of(laptopStandSilver, laptopStandBlack, wirelessMouseBlack, wirelessMouseWhite)
