@@ -21,6 +21,9 @@ public class Item {
     private Double price;
     private Integer quantity;
 
+    @Transient
+    private Boolean inStock;
+
     public Item() {
     }
 
@@ -77,6 +80,10 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Boolean getInStock() {
+        return this.quantity > 0;
     }
 
     @Override
