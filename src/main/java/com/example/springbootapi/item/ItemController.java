@@ -30,4 +30,14 @@ public class ItemController {
     public void deleteItem(@PathVariable("itemId") Long itemId) {
         itemService.deleteItem(itemId);
     }
+
+    @PutMapping(path = "{itemId}")
+    public void updateItem(
+            @PathVariable("itemId") Long itemId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String colour,
+            @RequestParam(required = false) Double price,
+            @RequestParam(required = false) Integer quantity) {
+        itemService.updateItem(itemId, name, colour, price, quantity);
+    }
 }
