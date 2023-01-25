@@ -25,4 +25,9 @@ public class ItemController {
     public void createNewItem(@RequestBody Item item){
         itemService.addNewItem(item);
     }
+
+    @DeleteMapping(path = "{itemId}")
+    public void deleteItem(@PathVariable("itemId") Long itemId) {
+        itemService.deleteItem(itemId);
+    }
 }
