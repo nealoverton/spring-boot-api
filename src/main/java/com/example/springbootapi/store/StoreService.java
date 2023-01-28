@@ -1,10 +1,12 @@
 package com.example.springbootapi.store;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -49,5 +51,24 @@ public class StoreService {
         }
 
         storeRepository.deleteById(storeId);
+    }
+
+    @Transactional
+    public void updateStore(Long storeId, String name, String address) {
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new IllegalStateException("Store with id " + storeId + " does not exist"));
+
+        if(name != null && name.length() > 0 && !Objects.equals(store.getName(), name)){
+            Optional<Store> storeOptional = storeRepository.findStoreByName(name);
+            if(storeOptional.isPresent()){
+                throw new IllegalStateException("A store with the name " + name + " already exists. Pick a different name to update store.");
+            }
+
+            store.setName(name);
+        }
+
+        if(address != null && address.length() > 0 && !Objects.equals(store.getAddress(), address)){
+            store.setAddress(address);
+        }
     }
 }
