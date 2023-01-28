@@ -22,7 +22,7 @@ public class ItemController {
     }
 
     @GetMapping(path="{itemId}")
-    public Optional<Item> getItem(@PathVariable("itemId") Long itemId) {
+    public Optional<Item> getItemById(@PathVariable("itemId") Long itemId) {
         return itemService.getItemById(itemId);
     }
 
