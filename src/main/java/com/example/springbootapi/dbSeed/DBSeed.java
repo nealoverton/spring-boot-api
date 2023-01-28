@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class dbSeed {
+public class DBSeed {
 
     @Bean
     CommandLineRunner commandLineRunner(ItemRepository itemRepository, StoreRepository storeRepository) {
