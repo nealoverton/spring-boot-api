@@ -44,7 +44,7 @@ public class ItemService {
         boolean exists = itemRepository.existsById(itemId);
 
         if(!exists){
-            throw new IllegalStateException("item with id " + itemId + " does not exist");
+            throw new IllegalStateException("Item with id " + itemId + " does not exist");
         }
         itemRepository.deleteById(itemId);
     }
@@ -52,7 +52,7 @@ public class ItemService {
     @Transactional
     public void updateItem(Long itemId, String name, String colour, Double price, Integer quantity) {
         Item item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new IllegalStateException("item with id " + itemId + " does not exist"));
+                .orElseThrow(() -> new IllegalStateException("Item with id " + itemId + " does not exist"));
 
         if(name != null && name.length() > 0 && colour != null && colour.length() > 0) {
             Optional<Item> itemOptional = itemRepository.findItemByNameAndColour(name, colour);

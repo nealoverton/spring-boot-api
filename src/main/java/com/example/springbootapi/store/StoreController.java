@@ -30,4 +30,9 @@ public class StoreController {
     public void createNewStore(@RequestBody Store store) {
         storeService.addNewStore(store);
     }
+
+    @DeleteMapping(path = "{storeId}")
+    public void deleteStore(@PathVariable("storeId") Long storeId){
+        storeService.deleteStore(storeId);
+    }
 }

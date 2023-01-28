@@ -40,4 +40,14 @@ public class StoreService {
 
         storeRepository.save(store);
     }
+
+    public void deleteStore(Long storeId) {
+        boolean exists = storeRepository.existsById(storeId);
+
+        if(!exists){
+            throw new IllegalStateException("Store with id " + storeId + " does not exist");
+        }
+
+        storeRepository.deleteById(storeId);
+    }
 }
