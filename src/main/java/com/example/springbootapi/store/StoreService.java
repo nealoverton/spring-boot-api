@@ -30,4 +30,14 @@ public class StoreService {
 
         return storeOptional;
     }
+
+    public void addNewStore(Store store) {
+        Optional<Store> storeOptional = storeRepository.findStoreByName(store.getName());
+
+        if(storeOptional.isPresent()){
+            throw new IllegalStateException("A store with that name already exists. Pick another name to add store.");
+        }
+
+        storeRepository.save(store);
+    }
 }
