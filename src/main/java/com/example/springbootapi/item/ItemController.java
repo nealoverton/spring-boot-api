@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/item")
+@RequestMapping(path = "api/items")
 public class ItemController {
     private final ItemService itemService;
 
@@ -41,8 +41,7 @@ public class ItemController {
             @PathVariable("itemId") Long itemId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String colour,
-            @RequestParam(required = false) Double price,
-            @RequestParam(required = false) Integer quantity) {
-        itemService.updateItem(itemId, name, colour, price, quantity);
+            @RequestParam(required = false) Double price) {
+        itemService.updateItem(itemId, name, colour, price);
     }
 }

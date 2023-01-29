@@ -1,9 +1,14 @@
 package com.example.springbootapi.item;
 
+import com.example.springbootapi.store.Store;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table
+@Table(name = "items")
 public class Item {
     @Id
     @SequenceGenerator(
@@ -19,27 +24,29 @@ public class Item {
     private String name;
     private String colour;
     private Double price;
-    private Integer quantity;
 
-    @Transient
-    private Boolean inStock;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "items")
+    private Set<Store> stores = new HashSet<>();
 
     public Item() {
     }
 
-    public Item(Long id, String name, String colour, Double price, Integer quantity) {
+    public Item(Long id, String name, String colour, Double price) {
         this.id = id;
         this.name = name;
         this.colour = colour;
         this.price = price;
-        this.quantity = quantity;
     }
 
-    public Item(String name, String colour, Double price, Integer quantity) {
+    public Item(String name, String colour, Double price) {
         this.name = name;
         this.colour = colour;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -74,16 +81,12 @@ public class Item {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Set<Store> getStores() {
+        return stores;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Boolean getInStock() {
-        return this.quantity > 0;
+    public void setStores(Set<Store> stores) {
+        this.stores = stores;
     }
 
     @Override
@@ -93,7 +96,6 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", colour='" + colour + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

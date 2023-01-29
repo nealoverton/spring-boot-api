@@ -50,7 +50,7 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateItem(Long itemId, String name, String colour, Double price, Integer quantity) {
+    public void updateItem(Long itemId, String name, String colour, Double price) {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException("Item with id " + itemId + " does not exist"));
 
@@ -81,10 +81,6 @@ public class ItemService {
 
         if(price != null && price > 0.00 && !Objects.equals(item.getPrice(), price)) {
             item.setPrice(price);
-        }
-
-        if(quantity != null && quantity > 0 && !Objects.equals(item.getQuantity(), quantity)) {
-            item.setQuantity(quantity);
         }
     }
 }

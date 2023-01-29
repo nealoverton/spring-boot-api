@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/store")
+@RequestMapping(path = "api/stores")
 public class StoreController {
     private final StoreService storeService;
 

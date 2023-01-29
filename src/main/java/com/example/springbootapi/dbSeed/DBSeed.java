@@ -16,17 +16,25 @@ public class DBSeed {
     @Bean
     CommandLineRunner commandLineRunner(ItemRepository itemRepository, StoreRepository storeRepository) {
         return args -> {
-            Item laptopStandSilver = new Item("Laptop Stand", "silver", 39.99, 3);
-            Item laptopStandBlack = new Item("Laptop Stand", "black", 39.99, 1);
-            Item wirelessMouseBlack = new Item("Wireless Mouse", "black", 28.99, 3);
-            Item wirelessMouseWhite = new Item("Wireless Mouse", "white", 28.99, 0);
+            Item laptopStandSilver = new Item("Laptop Stand", "silver", 39.99);
+            Item laptopStandBlack = new Item("Laptop Stand", "black", 39.99);
+            Item wirelessMouseBlack = new Item("Wireless Mouse", "black", 28.99);
+            Item wirelessMouseWhite = new Item("Wireless Mouse", "white", 28.99);
+
+            Store manchester = new Store("Manchester", "55-57 Bridge St, Manchester M3 3BQ");
+            Store hull = new Store("Hull", "1-73 Humber St, Hull HU1 1TU");
+
+            manchester.addItem(laptopStandBlack);
+            manchester.addItem(wirelessMouseBlack);
+            manchester.addItem(laptopStandSilver);
+            hull.addItem(wirelessMouseWhite);
+            hull.addItem(wirelessMouseBlack);
+            hull.addItem(laptopStandSilver);
+
 
             itemRepository.saveAll(
                     List.of(laptopStandSilver, laptopStandBlack, wirelessMouseBlack, wirelessMouseWhite)
             );
-
-            Store manchester = new Store("Manchester", "55-57 Bridge St, Manchester M3 3BQ");
-            Store hull = new Store("Hull", "1-73 Humber St, Hull HU1 1TU");
 
             storeRepository.saveAll(
                     List.of(manchester, hull)
