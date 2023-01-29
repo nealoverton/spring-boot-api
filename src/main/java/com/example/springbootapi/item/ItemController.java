@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/items")
@@ -22,7 +21,7 @@ public class ItemController {
     }
 
     @GetMapping(path="{itemId}")
-    public Optional<Item> getItemById(@PathVariable("itemId") Long itemId) {
+    public ItemStockists getItemById(@PathVariable("itemId") Long itemId) {
         return itemService.getItemById(itemId);
     }
 

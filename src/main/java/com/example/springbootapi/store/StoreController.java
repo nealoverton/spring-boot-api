@@ -22,7 +22,7 @@ public class StoreController {
     }
 
     @GetMapping(path = "{storeId}")
-    public Optional<Store> getStoreById(@PathVariable("storeId") Long storeId){
+    public StoreInventory getStoreById(@PathVariable("storeId") Long storeId){
         return storeService.getStoreById(storeId);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ItemService {
@@ -22,14 +23,17 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Optional<Item> getItemById(Long itemId) {
+    public ItemStockists getItemById(Long itemId) {
         Optional<Item> itemOptional = itemRepository.findById(itemId);
 
         if(!itemOptional.isPresent()) {
             throw new IllegalStateException("Item not found");
         }
 
-        return itemOptional;
+        Item item = itemOptional.get();
+        Set stores = item.getStores();
+
+        return new ItemStockists(item, stores);
     }
 
     public void addNewItem(Item item) {

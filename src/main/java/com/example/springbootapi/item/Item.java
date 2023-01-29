@@ -31,6 +31,7 @@ public class Item {
                     CascadeType.MERGE
             },
             mappedBy = "items")
+    @JsonIgnore
     private Set<Store> stores = new HashSet<>();
 
     public Item() {

@@ -1,5 +1,6 @@
 package com.example.springbootapi.store;
 
+import com.example.springbootapi.item.Item;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class StoreService {
@@ -22,14 +24,17 @@ public class StoreService {
         return storeRepository.findAll();
     }
 
-    public Optional<Store> getStoreById(Long storeId) {
+    public StoreInventory getStoreById(Long storeId) {
         Optional<Store> storeOptional = storeRepository.findById(storeId);
 
-        if(!storeOptional.isPresent()) {
-            throw new IllegalStateException("Store not found");
+        if(!storeOptional.isPresent()){
+            throw new IllegalStateException("Store with id " + storeId + " does not exist");
         }
 
-        return storeOptional;
+        Store store = storeOptional.get();
+        Set items = store.getItems();
+
+        return new StoreInventory(store, items);
     }
 
     public void addNewStore(Store store) {
