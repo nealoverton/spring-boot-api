@@ -17,11 +17,13 @@ public class DBSeed {
     CommandLineRunner commandLineRunner(ItemRepository itemRepository, StoreRepository storeRepository) {
         return args -> {
             Item laptopStandSilver = new Item("Laptop Stand", "silver", 39.99);
+            Item laptopStandSilver2 = new Item("Laptop Stand", "silver", 39.99);
             Item laptopStandBlack = new Item("Laptop Stand", "black", 39.99);
             Item wirelessMouseBlack = new Item("Wireless Mouse", "black", 28.99);
             Item wirelessMouseWhite = new Item("Wireless Mouse", "white", 28.99);
 
             Store manchester = new Store("Manchester", "55-57 Bridge St, Manchester M3 3BQ");
+            Store manchesterCentral = new Store("Manchester", "55-57 Bridge St, Manchester M3 3BQ");
             Store hull = new Store("Hull", "1-73 Humber St, Hull HU1 1TU");
 
             manchester.addItem(laptopStandBlack);
@@ -33,11 +35,11 @@ public class DBSeed {
 
 
             itemRepository.saveAll(
-                    List.of(laptopStandSilver, laptopStandBlack, wirelessMouseBlack, wirelessMouseWhite)
+                    List.of(laptopStandSilver, laptopStandBlack, wirelessMouseBlack, wirelessMouseWhite, laptopStandSilver2)
             );
 
             storeRepository.saveAll(
-                    List.of(manchester, hull)
+                    List.of(manchester, hull, manchesterCentral)
             );
         };
 

@@ -37,8 +37,8 @@ public class ItemService {
     }
 
     public void addNewItem(Item item) {
-        Optional<Item> itemOptional = itemRepository.findItemByNameAndColour(item.getName(), item.getColour());
-        if(itemOptional.isPresent()) {
+        List<Item> itemList = itemRepository.findItemByNameAndColour(item.getName(), item.getColour());
+        if(!itemList.isEmpty()) {
             throw new IllegalStateException("That item already exists. Pick a different name or colour to add to inventory.");
         }
         itemRepository.save(item);
@@ -59,15 +59,15 @@ public class ItemService {
                 .orElseThrow(() -> new IllegalStateException("Item with id " + itemId + " does not exist"));
 
         if(name != null && name.length() > 0 && colour != null && colour.length() > 0) {
-            Optional<Item> itemOptional = itemRepository.findItemByNameAndColour(name, colour);
-            if(itemOptional.isPresent()){
+            List<Item> itemList = itemRepository.findItemByNameAndColour(item.getName(), item.getColour());
+            if(!itemList.isEmpty()) {
                 throw new IllegalStateException("That item already exists. Pick a different name or colour to update inventory.");
             }
         }
 
         if(name != null && name.length() > 0 && !Objects.equals(item.getName(), name)) {
-            Optional<Item> itemOptional = itemRepository.findItemByNameAndColour(name, item.getColour());
-            if(itemOptional.isPresent()){
+            List<Item> itemList = itemRepository.findItemByNameAndColour(item.getName(), item.getColour());
+            if(!itemList.isEmpty()) {
                 throw new IllegalStateException("That item already exists. Pick a different name or colour to update inventory.");
             }
 
@@ -75,8 +75,8 @@ public class ItemService {
         }
 
         if(colour != null && colour.length() > 0 && !Objects.equals(item.getColour(), colour)) {
-            Optional<Item> itemOptional = itemRepository.findItemByNameAndColour(item.getName(), colour);
-            if(itemOptional.isPresent()){
+            List<Item> itemList = itemRepository.findItemByNameAndColour(item.getName(), item.getColour());
+            if(!itemList.isEmpty()) {
                 throw new IllegalStateException("That item already exists. Pick a different name or colour to update inventory.");
             }
 

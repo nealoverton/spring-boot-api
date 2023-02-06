@@ -38,9 +38,8 @@ public class StoreService {
     }
 
     public void addNewStore(Store store) {
-        Optional<Store> storeOptional = storeRepository.findStoreByName(store.getName());
-
-        if(storeOptional.isPresent()){
+        List<Store> storeList = storeRepository.findStoreByName(store.getName());
+        if(!storeList.isEmpty()){
             throw new IllegalStateException("A store with that name already exists. Pick another name to add store.");
         }
 
@@ -63,8 +62,8 @@ public class StoreService {
                 .orElseThrow(() -> new IllegalStateException("Store with id " + storeId + " does not exist"));
 
         if(name != null && name.length() > 0 && !Objects.equals(store.getName(), name)){
-            Optional<Store> storeOptional = storeRepository.findStoreByName(name);
-            if(storeOptional.isPresent()){
+            List<Store> storeList = storeRepository.findStoreByName(store.getName());
+            if(!storeList.isEmpty()){
                 throw new IllegalStateException("A store with the name " + name + " already exists. Pick a different name to update store.");
             }
 

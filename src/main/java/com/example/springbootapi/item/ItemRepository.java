@@ -9,7 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    @Query("SELECT i FROM Item i WHERE i.name = ?1 AND i.colour = ?2")
-    Optional<Item> findItemByNameAndColour(String name, String colour);
+    List<Item> findItemByNameAndColour(String name, String colour);
 }
